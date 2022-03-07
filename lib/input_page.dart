@@ -4,7 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 
 const bottomContainerHeight = 80.0;
-const cardsColor = Color(0xFF1D1E33);
+const activeCardColor = Color(0xFF1D1E33);
+const inactiveCardColor = Color(0xFF111328);
 const bottomContainerColor = Color(0xFFEB1555);
 
 class InputPage extends StatefulWidget {
@@ -13,6 +14,34 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+
+  Color maleCardColor = inactiveCardColor;
+  Color femaleCardColor = inactiveCardColor;
+
+  // 1 = male,  2 = female
+  void updateColor(int gender) {
+    // male was pressed
+    if (gender == 1) {
+      if (maleCardColor == inactiveCardColor) {
+        maleCardColor = activeCardColor;
+        // maleがアクティブになるとfemaleはイナクティブになる
+        femaleCardColor = inactiveCardColor;
+      } else {
+        maleCardColor = inactiveCardColor;
+      }
+    }
+    // female was pressed
+    if (gender == 2) {
+      if (femaleCardColor == inactiveCardColor) {
+        femaleCardColor = activeCardColor;
+        // femaleがアクティブになるとmaleはイナクティブになる
+        maleCardColor = inactiveCardColor;
+      } else {
+        femaleCardColor = inactiveCardColor;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,19 +56,36 @@ class _InputPageState extends State<InputPage> {
                 children: [
                   // 1
                   Expanded(
-                    child: reusableCard(
-                      color: cardsColor,
-                      cardChild: IconContent(
-                        icon: FontAwesomeIcons.mars,
-                        sex: "MALE",
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          updateColor(1);
+                        });
+                      },
+                      child: reusableCard(
+                        color: maleCardColor,
+                        cardChild: IconContent(
+                          icon: FontAwesomeIcons.mars,
+                          sex: "MALE",
+                        ),
                       ),
                     ),
                   ),
                   // 1.2
                   Expanded(
-                    child: reusableCard(
-                      color: cardsColor,
-                      cardChild: IconContent(icon: FontAwesomeIcons.venus, sex: "FEMALE",),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          updateColor(2);
+                        });
+                      },
+                      child: reusableCard(
+                        color: femaleCardColor,
+                        cardChild: IconContent(
+                          icon: FontAwesomeIcons.venus,
+                          sex: "FEMALE",
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -47,8 +93,8 @@ class _InputPageState extends State<InputPage> {
             ),
             // 2
             Expanded(
-              child: Card(
-                color: cardsColor,
+              child: reusableCard(
+                color: activeCardColor,
               ),
             ),
             // 3
@@ -57,13 +103,13 @@ class _InputPageState extends State<InputPage> {
                 children: [
                   // 3.1
                   Expanded(
-                      child: Card(
-                    color: cardsColor,
+                      child: reusableCard(
+                    color: activeCardColor,
                   )),
                   // 3.2
                   Expanded(
-                    child: Card(
-                      color: cardsColor,
+                    child: reusableCard(
+                      color: activeCardColor,
                     ),
                   ),
                 ],
@@ -79,7 +125,3 @@ class _InputPageState extends State<InputPage> {
         ));
   }
 }
-
-
-
-
