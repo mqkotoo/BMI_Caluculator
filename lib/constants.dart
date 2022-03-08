@@ -1,6 +1,8 @@
 
 
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 const bottomContainerHeight = 80.0;
@@ -17,4 +19,29 @@ const labelTextStyle = TextStyle(
 const bodyNumberStyle = TextStyle(
     fontSize: 50.0,
     fontWeight: FontWeight.w900
+);
+
+const LargeButtonTextStyle = TextStyle(
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+);
+
+const titleTextStyle = TextStyle(
+  fontSize: 50.0,
+  fontWeight: FontWeight.bold,
+);
+
+const resultTextStyle = TextStyle(
+  color: Color(0xFF24D876),
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+);
+
+const bmiNumberText = TextStyle(
+  fontSize: 100.0,
+  fontWeight: FontWeight.bold,
+);
+
+const bodyTextStyle = TextStyle(
+  fontSize: 25.0,
 );
